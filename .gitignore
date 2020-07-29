@@ -6,3 +6,6 @@
 *.webp binary
 *.woff binary
 *.woff2 binary
+
+.idea/
+node_modules/
