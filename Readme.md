@@ -1,7 +1,7 @@
 # Личный проект «Менеджер задач» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий Страджу](https://up.htmlacademy.ru/ecmascript/12/user/128392).
-* Наставник: `Неизвестно`.
+* Наставник: [Станислав Посиделов](https://htmlacademy.ru/profile/stanispos).
 
 ---
 
