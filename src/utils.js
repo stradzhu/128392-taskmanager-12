@@ -26,12 +26,8 @@ const isTaskExpiringToday = (dueDate) => {
   return currentDate.getTime() === dueDate.getTime();
 };
 
-const isTaskRepeating = (repeating) => {
-  return Object.values(repeating).some(Boolean);
-};
+const isTaskRepeating = (repeating) => Object.values(repeating).some(Boolean);
 
-const humanizeTaskDueDate = (dueDate) => {
-  return dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
-};
+const humanizeTaskDueDate = (dueDate) => dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
 
 export {getRandomInteger, isTaskExpired, isTaskExpiringToday, isTaskRepeating, humanizeTaskDueDate};

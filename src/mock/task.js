@@ -27,22 +27,17 @@ const generateDate = () => {
   return new Date(currentDate);
 };
 
-const generateRepeating = () => {
-  return {
-    mo: Boolean(getRandomInteger(0, 1)),
-    tu: false,
-    we: Boolean(getRandomInteger(0, 1)),
-    th: false,
-    fr: Boolean(getRandomInteger(0, 1)),
-    sa: false,
-    su: Boolean(getRandomInteger(0, 1))
-  };
-};
+const generateRepeating = () => ({
+  mo: Boolean(getRandomInteger(0, 1)),
+  tu: false,
+  we: Boolean(getRandomInteger(0, 1)),
+  th: false,
+  fr: Boolean(getRandomInteger(0, 1)),
+  sa: false,
+  su: Boolean(getRandomInteger(0, 1))
+});
 
-const getRandomColor = () => {
-  const randomIndex = getRandomInteger(0, COLORS.length - 1);
-  return COLORS[randomIndex];
-};
+const getRandomColor = () => COLORS[getRandomInteger(0, COLORS.length - 1)];
 
 const generateTask = () => {
   const dueDate = generateDate();

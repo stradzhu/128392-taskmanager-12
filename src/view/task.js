@@ -3,25 +3,15 @@ import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate} from "../utils.js";
 export const createTaskTemplate = (task) => {
   const {color, description, dueDate, repeating, isArchive, isFavorite} = task;
 
-  const date = dueDate !== null
-    ? humanizeTaskDueDate(dueDate)
-    : ``;
+  const date = dueDate !== null ? humanizeTaskDueDate(dueDate) : ``;
 
-  const deadlineClassName = isTaskExpired(dueDate)
-    ? `card--deadline`
-    : ``;
+  const deadlineClassName = isTaskExpired(dueDate) ? `card--deadline` : ``;
 
-  const repeatClassName = isTaskRepeating(repeating)
-    ? `card--repeat`
-    : ``;
+  const repeatClassName = isTaskRepeating(repeating) ? `card--repeat` : ``;
 
-  const archiveClassName = isArchive
-    ? ``
-    : `card__btn--disabled`;
+  const archiveClassName = isArchive ? `` : `card__btn--disabled`;
 
-  const favoriteClassName = isFavorite
-    ? ``
-    : `card__btn--disabled`;
+  const favoriteClassName = isFavorite ? `` : `card__btn--disabled`;
 
   return `<article class="card card--${color} ${deadlineClassName} ${repeatClassName}">
     <div class="card__form">
