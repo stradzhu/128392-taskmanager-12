@@ -13,8 +13,10 @@ const createFilterItemTemplate = (filter, isChecked) => {
     </label>`;
 };
 
-export const createFilterTemplate = (filterItems) => (
+const createFilterTemplate = (filterItems) => (
   `<section class="main__filter filter container">
     ${filterItems.map((filter, index) => createFilterItemTemplate(filter, index === 0)).join(``)}
   </section>`
 );
+
+export {createFilterTemplate};

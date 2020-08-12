@@ -1,5 +1,5 @@
-import {COLORS} from "../const.js";
-import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate} from "../utils.js";
+import {COLORS} from '../const.js';
+import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate} from '../utils.js';
 
 const createTaskEditDateTemplate = (dueDate) => (
   `<button class="card__date-deadline-toggle" type="button">
@@ -48,7 +48,7 @@ const createTaskEditColorsTemplate = (currentColor) => (
     <label for="color-${color}" class="card__color card__color--${color}">${color}</label>`).join(``)
 );
 
-export const createTaskEditTemplate = (task = {}) => {
+const createTaskEditTemplate = (task = {}) => {
   const {
     color = `black`,
     description = ``,
@@ -118,3 +118,5 @@ export const createTaskEditTemplate = (task = {}) => {
     </form>
   </article>`;
 };
+
+export {createTaskEditTemplate};

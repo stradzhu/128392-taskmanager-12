@@ -1,4 +1,4 @@
-export const createMenuTemplate = () => (
+const createMenuTemplate = () => (
   `<section class="main__control control container">
     <h1 class="control__title">TASKMANAGER</h1>
     <section class="control__btn-wrap">
@@ -11,3 +11,5 @@ export const createMenuTemplate = () => (
     </section>
   </section>`
 );
+
+export {createMenuTemplate};

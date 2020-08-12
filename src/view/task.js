@@ -1,6 +1,6 @@
-import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate} from "../utils.js";
+import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate} from '../utils.js';
 
-export const createTaskTemplate = (task) => {
+const createTaskTemplate = (task) => {
   const {color, description, dueDate, repeating, isArchive, isFavorite} = task;
 
   const date = dueDate !== null ? humanizeTaskDueDate(dueDate) : ``;
@@ -52,3 +52,5 @@ export const createTaskTemplate = (task) => {
     </div>
   </article>`;
 };
+
+export {createTaskTemplate};

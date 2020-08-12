@@ -1,3 +1,10 @@
+const PlaceTemplate = {
+  BEFOREBEGIN: `beforebegin`,
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEND: `beforeend`,
+  AFTEREND: `afterend`
+};
+
 const getCurrentDate = () => {
   const currentDate = new Date();
   currentDate.setHours(23, 59, 59, 999);
@@ -30,4 +37,31 @@ const isTaskRepeating = (repeating) => Object.values(repeating).some(Boolean);
 
 const humanizeTaskDueDate = (dueDate) => dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
 
-export {getRandomInteger, isTaskExpired, isTaskExpiringToday, isTaskRepeating, humanizeTaskDueDate};
+const renderElement = (container, element, place = PlaceTemplate.BEFOREEND) => {
+  switch (place) {
+    case PlaceTemplate.BEFOREBEGIN:
+      container.before(element);
+      break;
+    case PlaceTemplate.AFTERBEGIN:
+      container.prepend(element);
+      break;
+    case PlaceTemplate.BEFOREEND:
+      container.append(element);
+      break;
+    case PlaceTemplate.AFTEREND:
+      container.after(element);
+      break;
+  }
+};
+
+const renderTemplate = (container, template, place = PlaceTemplate.BEFOREEND) => {
+  container.insertAdjacentHTML(place, template);
+};
+
+const createElement = (template) => {
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+  return newElement.firstChild;
+};
+
+export {getRandomInteger, isTaskExpired, isTaskExpiringToday, isTaskRepeating, humanizeTaskDueDate, renderElement, renderTemplate, createElement};

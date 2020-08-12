@@ -25,4 +25,3 @@ const generateFilter = (tasks) => (
 );
 
 export {generateFilter};
-
