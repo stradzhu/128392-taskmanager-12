@@ -37,7 +37,7 @@ const isTaskRepeating = (repeating) => Object.values(repeating).some(Boolean);
 
 const humanizeTaskDueDate = (dueDate) => dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
 
-const renderElement = (container, element, place = PlaceTemplate.BEFOREEND) => {
+const render = (container, element, place = PlaceTemplate.BEFOREEND) => {
   switch (place) {
     case PlaceTemplate.BEFOREBEGIN:
       container.before(element);
@@ -64,4 +64,4 @@ const createElement = (template) => {
   return newElement.firstChild;
 };
 
-export {getRandomInteger, isTaskExpired, isTaskExpiringToday, isTaskRepeating, humanizeTaskDueDate, renderElement, renderTemplate, createElement};
+export {getRandomInteger, isTaskExpired, isTaskExpiringToday, isTaskRepeating, humanizeTaskDueDate, render, renderTemplate, createElement};

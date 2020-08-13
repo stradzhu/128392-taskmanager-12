@@ -1,14 +1,14 @@
 import {createElement} from '../utils.js';
 
-const createBoardTemplate = () => `<section class="board container"></section>`;
+const createTaskContainerTemplate = () => `<div class="board__tasks"></div>`;
 
-export default class Board {
+export default class TaskContainer {
   constructor() {
     this._element = null;
   }
 
   getTemplate() {
-    return createBoardTemplate();
+    return createTaskContainerTemplate();
   }
 
   getElement() {
