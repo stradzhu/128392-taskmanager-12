@@ -1,4 +1,6 @@
-export const createMenuTemplate = () => (
+import {createElement} from '../utils.js';
+
+const createMenuTemplate = () => (
   `<section class="main__control control container">
     <h1 class="control__title">TASKMANAGER</h1>
     <section class="control__btn-wrap">
@@ -11,3 +13,27 @@ export const createMenuTemplate = () => (
     </section>
   </section>`
 );
+
+class Menu {
+  constructor() {
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createMenuTemplate();
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
+
+export default Menu;
