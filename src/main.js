@@ -1,4 +1,4 @@
-import {getRandomInteger, render} from './utils.js';
+import {getRandomInteger, render, replaceElement} from './utils.js';
 
 import MenuView from './view/menu.js';
 import FilterView from './view/filter.js';
@@ -19,41 +19,35 @@ const TaskParam = {
   COUNT_PER_STEP: 8
 };
 
+const ESCAPE_KEY_CODE = 27;
+
 const tasks = new Array(TaskParam.COUNT).fill().map(generateTask);
 const filters = generateFilter(tasks);
 
 const renderTask = (taskContainerElement, task) => {
-  const taskItemComponent = new TaskItemView(task);
-  const taskEditComponent = new TaskEditView(task);
-
-  const replaceCardToForm = () => {
-    taskContainerElement.replaceChild(taskEditComponent.getElement(), taskItemComponent.getElement());
-  };
-
-  const replaceFormToCard = () => {
-    taskContainerElement.replaceChild(taskItemComponent.getElement(), taskEditComponent.getElement());
-  };
+  const taskItemElement = new TaskItemView(task).getElement();
+  const taskEditElement = new TaskEditView(task).getElement();
 
   const onEscKeyDown = (evt) => {
-    if (evt.key === `Escape` || evt.key === `Esc`) {
+    if (evt.keyCode === ESCAPE_KEY_CODE) {
       evt.preventDefault();
-      replaceFormToCard();
+      replaceElement(taskContainerElement, taskItemElement, taskEditElement);
       document.removeEventListener(`keydown`, onEscKeyDown);
     }
   };
 
-  taskItemComponent.getElement().querySelector(`.card__btn--edit`).addEventListener(`click`, () => {
-    replaceCardToForm();
+  taskItemElement.querySelector(`.card__btn--edit`).addEventListener(`click`, () => {
+    replaceElement(taskContainerElement, taskEditElement, taskItemElement);
     document.addEventListener(`keydown`, onEscKeyDown);
   });
 
-  taskEditComponent.getElement().querySelector(`form`).addEventListener(`submit`, (evt) => {
+  taskEditElement.querySelector(`form`).addEventListener(`submit`, (evt) => {
     evt.preventDefault();
-    replaceFormToCard();
+    replaceElement(taskContainerElement, taskItemElement, taskEditElement);
     document.removeEventListener(`keydown`, onEscKeyDown);
   });
 
-  render(taskContainerElement, taskItemComponent.getElement());
+  render(taskContainerElement, taskItemElement);
 };
 
 const renderBoard = (boardContainer, boardTasks) => {

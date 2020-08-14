@@ -2,7 +2,7 @@ import {createElement} from '../utils.js';
 
 const createTaskContainerTemplate = () => `<div class="board__tasks"></div>`;
 
-export default class TaskContainer {
+class TaskContainer {
   constructor() {
     this._element = null;
   }
@@ -23,3 +23,5 @@ export default class TaskContainer {
     this._element = null;
   }
 }
+
+export default TaskContainer;

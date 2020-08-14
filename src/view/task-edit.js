@@ -120,7 +120,7 @@ const createTaskEditTemplate = ({color, description, dueDate, repeating}) => {
   </article>`;
 };
 
-export default class TaskEdit {
+class TaskEdit {
   constructor(task = BLANK_TASK) {
     this._task = task;
     this._element = null;
@@ -142,3 +142,5 @@ export default class TaskEdit {
     this._element = null;
   }
 }
+
+export default TaskEdit;

@@ -2,7 +2,7 @@ import {createElement} from '../utils.js';
 
 const createBoardTemplate = () => `<section class="board container"></section>`;
 
-export default class Board {
+class Board {
   constructor() {
     this._element = null;
   }
@@ -23,3 +23,5 @@ export default class Board {
     this._element = null;
   }
 }
+
+export default Board;

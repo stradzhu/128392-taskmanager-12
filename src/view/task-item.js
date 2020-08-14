@@ -53,7 +53,7 @@ const createTaskItemTemplate = (task) => {
   </article>`;
 };
 
-export default class TaskItem {
+class TaskItem {
   constructor(task) {
     this._task = task;
     this._element = null;
@@ -75,3 +75,5 @@ export default class TaskItem {
     this._element = null;
   }
 }
+
+export default TaskItem;

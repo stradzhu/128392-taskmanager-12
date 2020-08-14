@@ -19,7 +19,7 @@ const createFilterTemplate = (filterItems) => (
   </section>`
 );
 
-export default class Filter {
+class Filter {
   constructor(filterItems) {
     this._filterItems = filterItems;
     this._element = null;
@@ -41,3 +41,5 @@ export default class Filter {
     this._element = null;
   }
 }
+
+export default Filter;

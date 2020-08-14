@@ -64,4 +64,8 @@ const createElement = (template) => {
   return newElement.firstChild;
 };
 
-export {getRandomInteger, isTaskExpired, isTaskExpiringToday, isTaskRepeating, humanizeTaskDueDate, render, renderTemplate, createElement};
+const replaceElement = (parentNode, newChild, oldChild) => {
+  parentNode.replaceChild(newChild, oldChild);
+};
+
+export {getRandomInteger, isTaskExpired, isTaskExpiringToday, isTaskRepeating, humanizeTaskDueDate, render, renderTemplate, createElement, replaceElement};

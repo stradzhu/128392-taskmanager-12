@@ -8,7 +8,7 @@ const createSortTemplate = (sortItems) => (
   </div>`
 );
 
-export default class Sort {
+class Sort {
   constructor(sortItems) {
     this._sortItems = sortItems;
     this._element = null;
@@ -30,3 +30,5 @@ export default class Sort {
     this._element = null;
   }
 }
+
+export default Sort;

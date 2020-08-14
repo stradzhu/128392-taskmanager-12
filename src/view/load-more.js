@@ -2,7 +2,7 @@ import {createElement} from '../utils.js';
 
 const createLoadMoreTemplate = () => `<button class="load-more" type="button">load more</button>`;
 
-export default class LoadMore {
+class LoadMore {
   constructor() {
     this._element = null;
   }
@@ -23,3 +23,5 @@ export default class LoadMore {
     this._element = null;
   }
 }
+
+export default LoadMore;
