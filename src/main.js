@@ -56,7 +56,7 @@ const renderBoard = (boardContainer, boardTasks) => {
 
   render(boardContainer, boardComponent.getElement());
 
-  //  на пустом массиве метод every возвращает true
+  // на пустом массиве метод every возвращает true
   if (boardTasks.every((task) => task.isArchive)) {
     render(boardComponent.getElement(), new NoTaskView().getElement());
     return;
