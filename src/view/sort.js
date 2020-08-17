@@ -1,33 +1,37 @@
-import {createElement} from '../utils.js';
+import AbstractView from './abstract.js';
 
-const createSortItemTemplate = (title) => `<a href="#" class="board__filter">${title}</a>`;
+const createSortItemTemplate = (type, title) => `<a href="#" class="board__filter" data-sort-type="${type}">${title}</a>`;
 
 const createSortTemplate = (sortItems) => (
   `<div class="board__filter-list">
-    ${sortItems.map((title) => createSortItemTemplate(title)).join(``)}
+    ${sortItems.map(({type, title}) => createSortItemTemplate(type, title)).join(``)}
   </div>`
 );
 
-class Sort {
+class Sort extends AbstractView {
   constructor(sortItems) {
+    super();
     this._sortItems = sortItems;
-    this._element = null;
+    this._sortTypeChangeHandler = this._sortTypeChangeHandler.bind(this);
   }
 
   getTemplate() {
     return createSortTemplate(this._sortItems);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
+  _sortTypeChangeHandler(evt) {
+    let sortType = evt.target.dataset.sortType;
+    if (!sortType) {
+      return;
     }
 
-    return this._element;
+    evt.preventDefault();
+    this._callback.sortTypeChange(sortType);
   }
 
-  removeElement() {
-    this._element = null;
+  setSortTypeChangeHandler(callback) {
+    this._callback.sortTypeChange = callback;
+    this.getElement().addEventListener(`click`, this._sortTypeChangeHandler);
   }
 }
 
