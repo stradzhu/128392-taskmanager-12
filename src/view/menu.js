@@ -1,4 +1,4 @@
-import {createElement} from '../utils.js';
+import AbstractView from './abstract.js';
 
 const createMenuTemplate = () => (
   `<section class="main__control control container">
@@ -14,25 +14,9 @@ const createMenuTemplate = () => (
   </section>`
 );
 
-class Menu {
-  constructor() {
-    this._element = null;
-  }
-
+class Menu extends AbstractView {
   getTemplate() {
     return createMenuTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
 
