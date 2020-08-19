@@ -20,7 +20,7 @@ class Sort extends AbstractView {
   }
 
   _sortTypeChangeHandler(evt) {
-    let sortType = evt.target.dataset.sortType;
+    const sortType = evt.target.dataset.sortType;
     if (!sortType) {
       return;
     }
