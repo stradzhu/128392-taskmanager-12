@@ -53,6 +53,7 @@ const generateTask = () => {
       su: false
     };
   return {
+    id: Date.now() + parseInt(Math.random() * 10000, 10),
     description: generateDescription(),
     dueDate,
     repeating,
