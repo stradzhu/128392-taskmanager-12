@@ -165,18 +165,24 @@ class TaskEdit extends SmartView {
       this._datepicker = null;
     }
 
-    if (this._data.isDueDate) {
-      // flatpickr есть смысл инициализировать только в случае,
-      // если поле выбора даты доступно для заполнения
-      this._datepicker = flatpickr(
-          this.getElement().querySelector(`.card__date`),
-          {
-            dateFormat: `j F`,
-            defaultDate: this._data.dueDate,
-            onChange: this._dueDateChangeHandler // На событие flatpickr передаём наш колбэк
-          }
-      );
+    this._initDatepicker();
+  }
+
+  _initDatepicker() {
+    if (!this._data.isDueDate) {
+      return;
     }
+
+    // flatpickr есть смысл инициализировать только в случае,
+    // если поле выбора даты доступно для заполнения
+    this._datepicker = flatpickr(
+        this.getElement().querySelector(`.card__date`),
+        {
+          dateFormat: `j F`,
+          defaultDate: this._data.dueDate,
+          onChange: this._dueDateChangeHandler // На событие flatpickr передаём наш колбэк
+        }
+    );
   }
 
   _setInnerHandlers() {

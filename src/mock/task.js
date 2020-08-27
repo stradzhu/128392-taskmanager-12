@@ -1,5 +1,6 @@
 import {COLORS} from '../const.js';
 import {getRandomInteger} from '../utils/common.js';
+import {nanoid} from 'nanoid';
 
 const generateDescription = () => {
   const descriptions = [
@@ -53,7 +54,7 @@ const generateTask = () => {
       su: false
     };
   return {
-    id: Date.now() + parseInt(Math.random() * 10000, 10),
+    id: nanoid(),
     description: generateDescription(),
     dueDate,
     repeating,
