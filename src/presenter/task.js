@@ -19,11 +19,13 @@ class Task {
     this._taskEditComponent = null;
     this._mode = Mode.DEFAULT;
 
-    this._handleEditClick = this._handleEditClick.bind(this);
-    this._handleFavoriteClick = this._handleFavoriteClick.bind(this);
-    this._handleArchiveClick = this._handleArchiveClick.bind(this);
-    this._handleFormSubmit = this._handleFormSubmit.bind(this);
-    this._escKeyDownHandler = this._escKeyDownHandler.bind(this);
+    this._handle = {
+      editClick: this._handleEditClick.bind(this),
+      favoriteClick: this._handleFavoriteClick.bind(this),
+      archiveClick: this._handleArchiveClick.bind(this),
+      formSubmit: this._handleFormSubmit.bind(this),
+      escKeyDown: this._escKeyDownHandler.bind(this)
+    };
   }
 
   init(task) {
@@ -35,10 +37,10 @@ class Task {
     this._taskItemComponent = new TaskItemView(task);
     this._taskEditComponent = new TaskEditView(task);
 
-    this._taskItemComponent.setEditClickHandler(this._handleEditClick);
-    this._taskItemComponent.setFavoriteClickHandler(this._handleFavoriteClick);
-    this._taskItemComponent.setArchiveClickHandler(this._handleArchiveClick);
-    this._taskEditComponent.setFormSubmitHandler(this._handleFormSubmit);
+    this._taskItemComponent.setEditClickHandler(this._handle.editClick);
+    this._taskItemComponent.setFavoriteClickHandler(this._handle.favoriteClick);
+    this._taskItemComponent.setArchiveClickHandler(this._handle.archiveClick);
+    this._taskEditComponent.setFormSubmitHandler(this._handle.formSubmit);
 
     if (!prevTaskItemComponent || !prevTaskEditComponent) {
       render(this._taskListContainer, this._taskItemComponent);
@@ -70,14 +72,14 @@ class Task {
 
   _replaceCardToForm() {
     replace(this._taskEditComponent, this._taskItemComponent);
-    document.addEventListener(`keydown`, this._escKeyDownHandler);
+    document.addEventListener(`keydown`, this._handle.escKeyDown);
     this._changeMode();
     this._mode = Mode.EDITING;
   }
 
   _replaceFormToCard() {
     replace(this._taskItemComponent, this._taskEditComponent);
-    document.removeEventListener(`keydown`, this._escKeyDownHandler);
+    document.removeEventListener(`keydown`, this._handle.escKeyDown);
     this._mode = Mode.DEFAULT;
   }
 

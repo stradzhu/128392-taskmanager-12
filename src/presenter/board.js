@@ -24,10 +24,12 @@ class Board {
     this._noTaskComponent = new NoTaskView();
     this._loadMoreComponent = new LoadMoreView();
 
-    this._handleTaskChange = this._handleTaskChange.bind(this);
-    this._handleModeChange = this._handleModeChange.bind(this);
-    this._handleLoadMoreClick = this._handleLoadMoreClick.bind(this);
-    this._handleSortTypeChange = this._handleSortTypeChange.bind(this);
+    this._handle = {
+      taskChange: this._handleTaskChange.bind(this),
+      modeChange: this._handleModeChange.bind(this),
+      loadMoreClick: this._handleLoadMoreClick.bind(this),
+      sortTypeChange: this._handleSortTypeChange.bind(this)
+    };
   }
 
   init(boardTasks) {
@@ -84,11 +86,11 @@ class Board {
   _renderSort() {
     // Метод для рендеринга сортировки
     render(this._boardComponent, this._sortComponent, PlaceTemplate.AFTERBEGIN);
-    this._sortComponent.setSortTypeChangeHandler(this._handleSortTypeChange);
+    this._sortComponent.setSortTypeChangeHandler(this._handle.sortTypeChange);
   }
 
   _renderTask(task) {
-    const taskPresenter = new TaskPresenter(this._taskContinerComponent, this._handleTaskChange, this._handleModeChange);
+    const taskPresenter = new TaskPresenter(this._taskContinerComponent, this._handle.taskChange, this._handle.modeChange);
     taskPresenter.init(task);
     this._taskPresenter[task.id] = taskPresenter;
   }
@@ -118,7 +120,7 @@ class Board {
     // Метод, куда уйдёт логика по отрисовке компонетов задачи,
     // текущая функция renderTask в main.js
     render(this._boardComponent, this._loadMoreComponent);
-    this._loadMoreComponent.setClickHandler(this._handleLoadMoreClick);
+    this._loadMoreComponent.setClickHandler(this._handle.loadMoreClick);
   }
 
   _clearTaskList() {

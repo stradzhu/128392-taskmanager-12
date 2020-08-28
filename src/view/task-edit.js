@@ -131,13 +131,15 @@ class TaskEdit extends SmartView {
     this._data = TaskEdit.parseTaskToData(task);
     this._datepicker = null;
 
-    this._formSubmitHandler = this._formSubmitHandler.bind(this);
-    this._descriptionInputHandler = this._descriptionInputHandler.bind(this);
-    this._dueDateToggleHandler = this._dueDateToggleHandler.bind(this);
-    this._dueDateChangeHandler = this._dueDateChangeHandler.bind(this);
-    this._repeatingToggleHandler = this._repeatingToggleHandler.bind(this);
-    this._repeatingChangeHandler = this._repeatingChangeHandler.bind(this);
-    this._colorChangeHandler = this._colorChangeHandler.bind(this);
+    this._handler = {
+      formSubmit: this._formSubmitHandler.bind(this),
+      descriptionInput: this._descriptionInputHandler.bind(this),
+      dueDateToggle: this._dueDateToggleHandler.bind(this),
+      dueDateChange: this._dueDateChangeHandler.bind(this),
+      repeatingToggle: this._repeatingToggleHandler.bind(this),
+      repeatingChange: this._repeatingChangeHandler.bind(this),
+      colorChange: this._colorChangeHandler.bind(this)
+    };
 
     this._setInnerHandlers();
     this._setDatepicker();
@@ -180,7 +182,7 @@ class TaskEdit extends SmartView {
         {
           dateFormat: `j F`,
           defaultDate: this._data.dueDate,
-          onChange: this._dueDateChangeHandler // На событие flatpickr передаём наш колбэк
+          onChange: this._handler.dueDateChange // На событие flatpickr передаём наш колбэк
         }
     );
   }
@@ -188,24 +190,24 @@ class TaskEdit extends SmartView {
   _setInnerHandlers() {
     this.getElement()
       .querySelector(`.card__date-deadline-toggle`)
-      .addEventListener(`click`, this._dueDateToggleHandler);
+      .addEventListener(`click`, this._handler.dueDateToggle);
     this.getElement()
       .querySelector(`.card__repeat-toggle`)
-      .addEventListener(`click`, this._repeatingToggleHandler);
+      .addEventListener(`click`, this._handler.repeatingToggle);
     this.getElement()
       .querySelector(`.card__text`)
-      .addEventListener(`input`, this._descriptionInputHandler);
+      .addEventListener(`input`, this._handler.descriptionInput);
 
 
     if (this._data.isRepeating) {
       this.getElement()
         .querySelector(`.card__repeat-days-inner`)
-        .addEventListener(`change`, this._repeatingChangeHandler);
+        .addEventListener(`change`, this._handler.repeatingChange);
     }
 
     this.getElement()
       .querySelector(`.card__colors-wrap`)
-      .addEventListener(`change`, this._colorChangeHandler);
+      .addEventListener(`change`, this._handler.colorChange);
   }
 
   _dueDateToggleHandler(evt) {
@@ -273,7 +275,7 @@ class TaskEdit extends SmartView {
 
   setFormSubmitHandler(callback) {
     this._callback.formSubmit = callback;
-    this.getElement().querySelector(`form`).addEventListener(`submit`, this._formSubmitHandler);
+    this.getElement().querySelector(`form`).addEventListener(`submit`, this._handler.formSubmit);
   }
 
   static parseTaskToData(task) {
