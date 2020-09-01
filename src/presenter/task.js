@@ -1,8 +1,8 @@
-import {ESCAPE_KEY_CODE} from "../const.js";
-import {render, replace, remove} from "../utils/render.js";
+import {ESCAPE_KEY_CODE} from "../const";
+import {render, replace, remove} from "../utils/render";
 
-import TaskItemView from '../view/task-item.js';
-import TaskEditView from '../view/task-edit.js';
+import TaskItemView from '../view/task-item';
+import TaskEditView from '../view/task-edit';
 
 const Mode = {
   DEFAULT: `DEFAULT`,

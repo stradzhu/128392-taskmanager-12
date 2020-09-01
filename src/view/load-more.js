@@ -1,4 +1,4 @@
-import AbstractView from './abstract.js';
+import AbstractView from './abstract';
 
 const createLoadMoreTemplate = () => `<button class="load-more" type="button">load more</button>`;
 

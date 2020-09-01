@@ -1,4 +1,4 @@
-import AbstractView from './abstract.js';
+import AbstractView from './abstract';
 
 const createSortItemTemplate = (type, title) => `<a href="#" class="board__filter" data-sort-type="${type}">${title}</a>`;
 
