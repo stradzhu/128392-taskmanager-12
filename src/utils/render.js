@@ -1,4 +1,4 @@
-import AbstractView from '../view/abstract.js';
+import AbstractView from '../view/abstract';
 
 const PlaceTemplate = {
   BEFOREBEGIN: `beforebegin`,

@@ -1,15 +1,15 @@
-import {TaskParam, SortType} from '../const.js';
-import {render, PlaceTemplate, remove} from '../utils/render.js';
-import {sortTaskUp, sortTaskDown} from '../utils/task.js';
-import {updateItem} from '../utils/common.js';
+import {TaskParam, SortType} from '../const';
+import {render, PlaceTemplate, remove} from '../utils/render';
+import {sortTaskUp, sortTaskDown} from '../utils/task';
+import {updateItem} from '../utils/common';
 
-import BoardView from '../view/board.js';
-import SortView from '../view/sort.js';
-import TaskContainerView from '../view/task-container.js';
-import NoTaskView from '../view/no-task.js';
-import LoadMoreView from '../view/load-more.js';
+import BoardView from '../view/board';
+import SortView from '../view/sort';
+import TaskContainerView from '../view/task-container';
+import NoTaskView from '../view/no-task';
+import LoadMoreView from '../view/load-more';
 
-import TaskPresenter from './task.js';
+import TaskPresenter from './task';
 
 class Board {
   constructor(boardContainer) {

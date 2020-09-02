@@ -1,13 +1,13 @@
-import {TaskParam} from './const.js';
-import {render} from './utils/render.js';
+import {TaskParam} from './const';
+import {render} from './utils/render';
 
-import MenuView from './view/menu.js';
-import FilterView from './view/filter.js';
+import MenuView from './view/menu';
+import FilterView from './view/filter';
 
-import {generateTask} from './mock/task.js';
-import {generateFilter} from './mock/filter.js';
+import {generateTask} from './mock/task';
+import {generateFilter} from './mock/filter';
 
-import BoardPresenter from './presenter/board.js';
+import BoardPresenter from './presenter/board';
 
 const tasks = new Array(TaskParam.COUNT).fill().map(generateTask);
 const filters = generateFilter(tasks);
