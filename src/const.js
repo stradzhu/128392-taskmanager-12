@@ -9,10 +9,31 @@ const TaskParam = {
 
 const ESCAPE_KEY_CODE = 27;
 
-const SortType = [
-  {type: `default`, title: `SORT BY DEFAULT`},
-  {type: `date-up`, title: `SORT BY DATE up`},
-  {type: `date-down`, title: `SORT BY DATE down`}
-];
+const SortType = {
+  DEFAULT: `default`,
+  DATE_DOWN: `date-down`,
+  DATE_UP: `date-up`
+};
 
-export {COLORS, TaskParam, ESCAPE_KEY_CODE, SortType};
+const UserAction = {
+  UPDATE_TASK: `UPDATE_TASK`,
+  ADD_TASK: `ADD_TASK`,
+  DELETE_TASK: `DELETE_TASK`
+};
+
+const UpdateType = {
+  PATCH: `PATCH`,
+  MINOR: `MINOR`,
+  MAJOR: `MAJOR`
+};
+
+const FilterType = {
+  ALL: `all`,
+  OVERDUE: `overdue`,
+  TODAY: `today`,
+  FAVORITES: `favorites`,
+  REPEATING: `repeating`,
+  ARCHIVE: `archive`
+};
+
+export {COLORS, TaskParam, ESCAPE_KEY_CODE, SortType, UserAction, UpdateType, FilterType};
