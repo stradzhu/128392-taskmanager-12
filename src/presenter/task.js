@@ -11,12 +11,12 @@ const Mode = {
 
 class Task {
   constructor(taskListContainer, changeData, changeMode) {
-    this._taskListContainer = taskListContainer;
+    this._listContainer = taskListContainer;
     this._changeData = changeData;
     this._changeMode = changeMode;
 
-    this._taskItemComponent = null;
-    this._taskEditComponent = null;
+    this._itemComponent = null;
+    this._editComponent = null;
     this._mode = Mode.DEFAULT;
 
     this._handle = {
@@ -31,28 +31,28 @@ class Task {
   init(task) {
     this._task = task;
 
-    const prevTaskItemComponent = this._taskItemComponent;
-    const prevTaskEditComponent = this._taskEditComponent;
+    const prevTaskItemComponent = this._itemComponent;
+    const prevTaskEditComponent = this._editComponent;
 
-    this._taskItemComponent = new TaskItemView(task);
-    this._taskEditComponent = new TaskEditView(task);
+    this._itemComponent = new TaskItemView(task);
+    this._editComponent = new TaskEditView(task);
 
-    this._taskItemComponent.setEditClickHandler(this._handle.editClick);
-    this._taskItemComponent.setFavoriteClickHandler(this._handle.favoriteClick);
-    this._taskItemComponent.setArchiveClickHandler(this._handle.archiveClick);
-    this._taskEditComponent.setFormSubmitHandler(this._handle.formSubmit);
+    this._itemComponent.setEditClickHandler(this._handle.editClick);
+    this._itemComponent.setFavoriteClickHandler(this._handle.favoriteClick);
+    this._itemComponent.setArchiveClickHandler(this._handle.archiveClick);
+    this._editComponent.setFormSubmitHandler(this._handle.formSubmit);
 
     if (!prevTaskItemComponent || !prevTaskEditComponent) {
-      render(this._taskListContainer, this._taskItemComponent);
+      render(this._listContainer, this._itemComponent);
       return;
     }
 
     if (this._mode === Mode.DEFAULT) {
-      replace(this._taskItemComponent, prevTaskItemComponent);
+      replace(this._itemComponent, prevTaskItemComponent);
     }
 
     if (this._mode === Mode.EDITING) {
-      replace(this._taskEditComponent, prevTaskEditComponent);
+      replace(this._editComponent, prevTaskEditComponent);
     }
 
     remove(prevTaskItemComponent);
@@ -60,8 +60,8 @@ class Task {
   }
 
   destroy() {
-    remove(this._taskItemComponent);
-    remove(this._taskEditComponent);
+    remove(this._itemComponent);
+    remove(this._editComponent);
   }
 
   resetView() {
@@ -71,14 +71,14 @@ class Task {
   }
 
   _replaceCardToForm() {
-    replace(this._taskEditComponent, this._taskItemComponent);
+    replace(this._editComponent, this._itemComponent);
     document.addEventListener(`keydown`, this._handle.escKeyDown);
     this._changeMode();
     this._mode = Mode.EDITING;
   }
 
   _replaceFormToCard() {
-    replace(this._taskItemComponent, this._taskEditComponent);
+    replace(this._itemComponent, this._editComponent);
     document.removeEventListener(`keydown`, this._handle.escKeyDown);
     this._mode = Mode.DEFAULT;
   }
@@ -86,7 +86,7 @@ class Task {
   _escKeyDownHandler(evt) {
     if (evt.keyCode === ESCAPE_KEY_CODE) {
       evt.preventDefault();
-      this._taskEditComponent.reset(this._task);
+      this._editComponent.reset(this._task);
       this._replaceFormToCard();
     }
   }
