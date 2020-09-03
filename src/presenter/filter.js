@@ -3,88 +3,62 @@ import {render, PlaceTemplate, replace, remove} from '../utils/render';
 import {filter} from '../utils/filter';
 import {FilterType, UpdateType} from '../const';
 
-export default class Filter {
+class Filter {
   constructor(filterContainer, filterModel, tasksModel) {
-    this._filterContainer = filterContainer;
-    this._filterModel = filterModel;
+    this._container = filterContainer;
+    this._model = filterModel;
     this._tasksModel = tasksModel;
-    this._currentFilter = null;
+    this._current = null;
 
-    this._filterComponent = null;
+    this._component = null;
 
     this._handle = {
       modelEvent: this._handleModelEvent.bind(this),
-      filterTypeChange: this._handleFilterTypeChange.bind(this)
+      typeChange: this._handleTypeChange.bind(this)
     };
 
     this._tasksModel.addObserver(this._handle.modelEvent);
-    this._filterModel.addObserver(this._handle.modelEvent);
+    this._model.addObserver(this._handle.modelEvent);
   }
 
   init() {
-    this._currentFilter = this._filterModel.getFilter();
+    this._current = this._model.get();
 
-    const filters = this._getFilters();
-    const prevFilterComponent = this._filterComponent;
+    const filters = this._get();
+    const prevComponent = this._component;
 
-    this._filterComponent = new FilterView(filters, this._currentFilter);
-    this._filterComponent.setFilterTypeChangeHandler(this._handle.filterTypeChange);
+    this._component = new FilterView(filters, this._current);
+    this._component.setTypeChangeHandler(this._handle.typeChange);
 
-    if (prevFilterComponent === null) {
-      render(this._filterContainer, this._filterComponent, PlaceTemplate.BEFOREEND);
+    if (prevComponent === null) {
+      render(this._container, this._component, PlaceTemplate.BEFOREEND);
       return;
     }
 
-    replace(this._filterComponent, prevFilterComponent);
-    remove(prevFilterComponent);
+    replace(this._component, prevComponent);
+    remove(prevComponent);
   }
 
   _handleModelEvent() {
     this.init();
   }
 
-  _handleFilterTypeChange(filterType) {
-    if (this._currentFilter === filterType) {
+  _handleTypeChange(filterType) {
+    if (this._current === filterType) {
       return;
     }
 
-    this._filterModel.setFilter(UpdateType.MAJOR, filterType);
+    this._model.set(UpdateType.MAJOR, filterType);
   }
 
-  _getFilters() {
-    const tasks = this._tasksModel.getTasks();
-
-    return [
-      {
-        type: FilterType.ALL,
-        name: `All`,
-        count: filter[FilterType.ALL](tasks).length
-      },
-      {
-        type: FilterType.OVERDUE,
-        name: `Overdue`,
-        count: filter[FilterType.OVERDUE](tasks).length
-      },
-      {
-        type: FilterType.TODAY,
-        name: `Today`,
-        count: filter[FilterType.TODAY](tasks).length
-      },
-      {
-        type: FilterType.FAVORITES,
-        name: `Favorites`,
-        count: filter[FilterType.FAVORITES](tasks).length
-      },
-      {
-        type: FilterType.REPEATING,
-        name: `Repeating`,
-        count: filter[FilterType.REPEATING](tasks).length
-      },
-      {
-        type: FilterType.ARCHIVE,
-        name: `Archive`,
-        count: filter[FilterType.ARCHIVE](tasks).length
-      }
-    ];
+  _get() {
+    const tasks = this._tasksModel.get;
+    return Object.values(FilterType).map((title) => ({
+      type: title,
+      name: title.charAt(0).toUpperCase() + title.slice(1), // если принципиально, чтобы первая буква была большая
+      count: filter[title](tasks).length
+    }));
   }
 }
+
+export default Filter;

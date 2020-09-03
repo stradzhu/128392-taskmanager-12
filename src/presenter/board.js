@@ -51,13 +51,13 @@ class Board {
 
   createTask() {
     this._currentSortType = SortType.DEFAULT;
-    this._filterModel.setFilter(UpdateType.MAJOR, FilterType.ALL);
+    this._filterModel.set(UpdateType.MAJOR, FilterType.ALL);
     this._taskNewPresenter.init();
   }
 
   _getTasks() {
-    const filterType = this._filterModel.getFilter();
-    const tasks = this._tasksModel.getTasks();
+    const filterType = this._filterModel.get();
+    const tasks = this._tasksModel.get;
     const filtredTasks = filter[filterType](tasks);
 
     switch (this._currentSortType) {
@@ -65,9 +65,9 @@ class Board {
         return filtredTasks.sort(sortTaskUp);
       case SortType.DATE_DOWN:
         return filtredTasks.sort(sortTaskDown);
+      default:
+        return filtredTasks;
     }
-
-    return filtredTasks;
   }
 
   _handleModeChange() {
@@ -78,13 +78,13 @@ class Board {
   _handleViewAction(actionType, updateType, update) {
     switch (actionType) {
       case UserAction.UPDATE_TASK:
-        this._tasksModel.updateTask(updateType, update);
+        this._tasksModel.updateElement(updateType, update);
         break;
       case UserAction.ADD_TASK:
-        this._tasksModel.addTask(updateType, update);
+        this._tasksModel.addElement(updateType, update);
         break;
       case UserAction.DELETE_TASK:
-        this._tasksModel.deleteTask(updateType, update);
+        this._tasksModel.deleteElement(updateType, update);
         break;
     }
   }

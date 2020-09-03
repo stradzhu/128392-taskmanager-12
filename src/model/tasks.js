@@ -1,20 +1,24 @@
 import Observer from '../utils/observer';
 
-export default class Tasks extends Observer {
+class Tasks extends Observer {
   constructor() {
     super();
     this._tasks = [];
   }
 
-  setTasks(tasks) {
+  // TODO: сначала выполнил критерий Д3 оставим только методы get() и set(), а теперь незнаю какое имя придумать для
+  // решил оставить сеттер set и геттер get
+  // иначе можно set element() и get element() - но это мне кажется, еще большая нерзбериха
+  // или я не по понимаю преимущества использования геттера и сеттера
+  set set(tasks) {
     this._tasks = tasks.slice();
   }
 
-  getTasks() {
+  get get() {
     return this._tasks;
   }
 
-  updateTask(updateType, update) {
+  updateElement(updateType, update) {
     const index = this._tasks.findIndex((task) => task.id === update.id);
 
     if (index === -1) {
@@ -30,7 +34,7 @@ export default class Tasks extends Observer {
     this._notify(updateType, update);
   }
 
-  addTask(updateType, update) {
+  addElement(updateType, update) {
     this._tasks = [
       update,
       ...this._tasks
@@ -39,7 +43,7 @@ export default class Tasks extends Observer {
     this._notify(updateType, update);
   }
 
-  deleteTask(updateType, update) {
+  deleteElement(updateType, update) {
     const index = this._tasks.findIndex((task) => task.id === update.id);
 
     if (index === -1) {
@@ -54,3 +58,5 @@ export default class Tasks extends Observer {
     this._notify(updateType);
   }
 }
+
+export default Tasks;

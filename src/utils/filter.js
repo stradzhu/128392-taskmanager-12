@@ -1,6 +1,8 @@
 import {FilterType} from '../const';
 import {isTaskExpired, isTaskExpiringToday, isTaskRepeating} from './task';
 
+// TODO: не смог сделать (понять, что здесь вообще можно оптимизировать)
+// "С помощью .reduce это можно сгенерировать за один проход" :(
 const filter = {
   [FilterType.ALL]: (tasks) => tasks.filter((task) => !task.isArchive),
   [FilterType.OVERDUE]: (tasks) => tasks.filter((task) => isTaskExpired(task.dueDate)),
