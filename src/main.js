@@ -14,7 +14,7 @@ import FilterModel from "./model/filter.js";
 const tasks = new Array(TaskParam.COUNT).fill().map(generateTask);
 
 const tasksModel = new TasksModel();
-tasksModel.set = tasks;
+tasksModel.updateElements = tasks;
 
 const filterModel = new FilterModel();
 

@@ -57,7 +57,7 @@ class Board {
 
   _getTasks() {
     const filterType = this._filterModel.get();
-    const tasks = this._tasksModel.get;
+    const tasks = this._tasksModel.getElements;
     const filtredTasks = filter[filterType](tasks);
 
     switch (this._currentSortType) {

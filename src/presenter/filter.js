@@ -52,7 +52,7 @@ class Filter {
   }
 
   _get() {
-    const tasks = this._tasksModel.get;
+    const tasks = this._tasksModel.getElements;
     return Object.values(FilterType).map((title) => ({
       type: title,
       name: title.charAt(0).toUpperCase() + title.slice(1), // если принципиально, чтобы первая буква была большая

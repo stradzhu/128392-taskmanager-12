@@ -6,15 +6,11 @@ class Tasks extends Observer {
     this._tasks = [];
   }
 
-  // TODO: сначала выполнил критерий Д3 оставим только методы get() и set(), а теперь незнаю какое имя придумать для
-  // решил оставить сеттер set и геттер get
-  // иначе можно set element() и get element() - но это мне кажется, еще большая нерзбериха
-  // или я не по понимаю преимущества использования геттера и сеттера
-  set set(tasks) {
+  set updateElements(tasks) {
     this._tasks = tasks.slice();
   }
 
-  get get() {
+  get getElements() {
     return this._tasks;
   }
 
