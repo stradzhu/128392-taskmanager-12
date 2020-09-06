@@ -1,6 +1,14 @@
 import {getRandomInteger} from './utils/common';
 
-const COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
+const Color = {
+  BLACK: `black`,
+  YELLOW: `yellow`,
+  BLUE: `blue`,
+  GREEN: `green`,
+  PINK: `pink`
+};
+
+const COLORS = Object.values(Color);
 
 const TaskParam = {
   COUNT: getRandomInteger(15, 25),
@@ -36,4 +44,10 @@ const FilterType = {
   ARCHIVE: `archive`
 };
 
-export {COLORS, TaskParam, ESCAPE_KEY_CODE, SortType, UserAction, UpdateType, FilterType};
+const MenuItem = {
+  ADD_NEW_TASK: `ADD_NEW_TASK`,
+  TASKS: `TASKS`,
+  STATISTICS: `STATISTICS`
+};
+
+export {Color, COLORS, TaskParam, ESCAPE_KEY_CODE, SortType, UserAction, UpdateType, FilterType, MenuItem};

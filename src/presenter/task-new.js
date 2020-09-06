@@ -3,12 +3,13 @@ import {remove, render, PlaceTemplate} from '../utils/render';
 import {UserAction, UpdateType} from '../const';
 import {nanoid} from 'nanoid';
 
-export default class TaskNew {
+class TaskNew {
   constructor(taskListContainer, changeData) {
     this._taskListContainer = taskListContainer;
     this._changeData = changeData;
 
     this._taskEditComponent = null;
+    this._destroyCallback = null;
 
     this._handle = {
       formSubmit: this._handleFormSubmit.bind(this),
@@ -17,7 +18,9 @@ export default class TaskNew {
     };
   }
 
-  init() {
+  init(callback) {
+    this._destroyCallback = callback;
+
     if (this._taskEditComponent !== null) {
       return;
     }
@@ -34,6 +37,10 @@ export default class TaskNew {
   destroy() {
     if (this._taskEditComponent === null) {
       return;
+    }
+
+    if (this._destroyCallback !== null) {
+      this._destroyCallback();
     }
 
     remove(this._taskEditComponent);
@@ -64,3 +71,5 @@ export default class TaskNew {
     }
   }
 }
+
+export default TaskNew;

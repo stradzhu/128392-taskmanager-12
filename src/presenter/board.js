@@ -1,4 +1,4 @@
-import {TaskParam, SortType, UpdateType, UserAction, FilterType} from '../const';
+import {TaskParam, SortType, UpdateType, UserAction} from '../const';
 import {render, PlaceTemplate, remove} from '../utils/render';
 import {sortTaskUp, sortTaskDown} from '../utils/task';
 import {filter} from '../utils/filter';
@@ -36,9 +36,6 @@ class Board {
       sortTypeChange: this._handleSortTypeChange.bind(this)
     };
 
-    this._tasksModel.addObserver(this._handle.modelEvent);
-    this._filterModel.addObserver(this._handle.modelEvent);
-
     this._taskNewPresenter = new TaskNewPresenter(this._taskContinerComponent, this._handle.viewAction);
   }
 
@@ -46,13 +43,24 @@ class Board {
     render(this._boardContainer, this._boardComponent);
     render(this._boardComponent, this._taskContinerComponent);
 
+    this._tasksModel.addObserver(this._handle.modelEvent);
+    this._filterModel.addObserver(this._handle.modelEvent);
+
     this._renderBoard();
   }
 
-  createTask() {
-    this._currentSortType = SortType.DEFAULT;
-    this._filterModel.set(UpdateType.MAJOR, FilterType.ALL);
-    this._taskNewPresenter.init();
+  destroy() {
+    this._clearBoard({resetRenderedTaskCount: true, resetSortType: true});
+
+    remove(this._taskContinerComponent);
+    remove(this._boardComponent);
+
+    this._tasksModel.removeObserver(this._handle.modelEvent);
+    this._filterModel.removeObserver(this._handle.modelEvent);
+  }
+
+  createTask(callback) {
+    this._taskNewPresenter.init(callback);
   }
 
   _getTasks() {

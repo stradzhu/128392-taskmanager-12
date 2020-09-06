@@ -72,4 +72,4 @@ const sortTaskDown = (taskA, taskB) => {
 
 const isDatesEqual = (dateA, dateB) => moment(dateA).isSame(dateB);
 
-export {isTaskExpired, isTaskExpiringToday, isTaskRepeating, formatTaskDueDate, sortTaskUp, sortTaskDown, isDatesEqual};
+export {getCurrentDate, isTaskExpired, isTaskExpiringToday, isTaskRepeating, formatTaskDueDate, sortTaskUp, sortTaskDown, isDatesEqual};
