@@ -1,5 +1,3 @@
-import {getRandomInteger} from './utils/common';
-
 const Color = {
   BLACK: `black`,
   YELLOW: `yellow`,
@@ -10,10 +8,7 @@ const Color = {
 
 const COLORS = Object.values(Color);
 
-const TaskParam = {
-  COUNT: getRandomInteger(15, 25),
-  COUNT_PER_STEP: 8
-};
+const TASK_COUNT_PER_STEP = 8;
 
 const ESCAPE_KEY_CODE = 27;
 
@@ -32,7 +27,8 @@ const UserAction = {
 const UpdateType = {
   PATCH: `PATCH`,
   MINOR: `MINOR`,
-  MAJOR: `MAJOR`
+  MAJOR: `MAJOR`,
+  INIT: `INIT`
 };
 
 const FilterType = {
@@ -50,4 +46,4 @@ const MenuItem = {
   STATISTICS: `STATISTICS`
 };
 
-export {Color, COLORS, TaskParam, ESCAPE_KEY_CODE, SortType, UserAction, UpdateType, FilterType, MenuItem};
+export {Color, COLORS, TASK_COUNT_PER_STEP, ESCAPE_KEY_CODE, SortType, UserAction, UpdateType, FilterType, MenuItem};
