@@ -1,32 +1,30 @@
-import {TaskParam, MenuItem, UpdateType, FilterType} from './const';
+import {MenuItem, UpdateType, FilterType} from './const';
 import {PlaceTemplate, render, remove} from './utils/render';
-
 import MenuView from './view/menu';
 import StatisticsView from './view/statistics';
-
-import {generateTask} from './mock/task';
-
 import BoardPresenter from './presenter/board';
 import FilterPresenter from './presenter/filter';
-
 import TasksModel from './model/tasks';
 import FilterModel from "./model/filter.js";
+import Api from './api';
 
-const tasks = new Array(TaskParam.COUNT).fill().map(generateTask);
+const AUTHORIZATION = `Basic Stanislav-Privet!`;
+const END_POINT = `https://12.ecmascript.pages.academy/task-manager`;
+
+const api = new Api(END_POINT, AUTHORIZATION);
 
 const tasksModel = new TasksModel();
-tasksModel.updateElements = tasks;
-
 const filterModel = new FilterModel();
 
 const mainElement = document.querySelector(`.main`);
 const menuComponent = new MenuView();
 
 const handleTaskNewFormClose = () => {
+  menuComponent.getElement().querySelector(`[value=${MenuItem.TASKS}]`).disabled = false;
   menuComponent.setMenuItem(MenuItem.TASKS);
 };
 
-let statisticsComponent;
+let statisticsComponent = null;
 
 const handleMenuClick = (menuItem) => {
   switch (menuItem) {
@@ -44,15 +42,23 @@ const handleMenuClick = (menuItem) => {
     case MenuItem.STATISTICS:
       boardPresenter.destroy();
       statisticsComponent = new StatisticsView(tasksModel.getElements);
-      render(mainElement, statisticsComponent, PlaceTemplate.BEFOREEND);
+      render(mainElement, statisticsComponent);
       break;
   }
 };
 
-menuComponent.setMenuClickHandler(handleMenuClick);
-
-render(mainElement, menuComponent);
-
-const boardPresenter = new BoardPresenter(mainElement, tasksModel, filterModel);
+const boardPresenter = new BoardPresenter(mainElement, tasksModel, filterModel, api);
 new FilterPresenter(mainElement, filterModel, tasksModel).init();
 boardPresenter.init();
+
+api.getTasks()
+  .then((tasks) => {
+    tasksModel.updateElements = {updateType: UpdateType.INIT, tasks};
+  })
+  .catch(() => {
+    tasksModel.updateElements = {updateType: UpdateType.INIT, tasks: []};
+  })
+  .finally(()=>{
+    render(mainElement, menuComponent, PlaceTemplate.AFTERBEGIN);
+    menuComponent.setMenuClickHandler(handleMenuClick);
+  });

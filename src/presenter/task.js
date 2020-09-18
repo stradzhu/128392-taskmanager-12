@@ -8,7 +8,14 @@ import TaskEditView from '../view/task-edit';
 
 const Mode = {
   DEFAULT: `DEFAULT`,
-  EDITING: `EDITING`
+  EDITING: `EDITING`,
+  ABORTING: `ABORTING`
+};
+
+// Эммм, а это нормально, что в файле есть экспорт по умолчанию и именованный экспорт одновременно?
+export const State = {
+  SAVING: `SAVING`,
+  DELETING: `DELETING`
 };
 
 class Task {
@@ -56,7 +63,8 @@ class Task {
     }
 
     if (this._mode === Mode.EDITING) {
-      replace(this._editComponent, prevTaskEditComponent);
+      replace(this._itemComponent, prevTaskEditComponent);
+      this._mode = Mode.DEFAULT;
     }
 
     remove(prevTaskItemComponent);
@@ -71,6 +79,35 @@ class Task {
   resetView() {
     if (this._mode !== Mode.DEFAULT) {
       this._replaceFormToCard();
+    }
+  }
+
+  setViewState(state) {
+    const resetFormState = () => {
+      this._editComponent.updateData({
+        isDisabled: false,
+        isSaving: false,
+        isDeleting: false
+      });
+    };
+
+    switch (state) {
+      case State.SAVING:
+        this._editComponent.updateData({
+          isDisabled: true,
+          isSaving: true
+        });
+        break;
+      case State.DELETING:
+        this._editComponent.updateData({
+          isDisabled: true,
+          isDeleting: true
+        });
+        break;
+      case State.ABORTING:
+        this._itemComponent.shake(resetFormState);
+        this._editComponent.shake(resetFormState);
+        break;
     }
   }
 
@@ -139,7 +176,6 @@ class Task {
         isMinorUpdate ? UpdateType.MINOR : UpdateType.PATCH,
         update
     );
-    this._replaceFormToCard();
   }
 
   _handleDeleteClick(task) {

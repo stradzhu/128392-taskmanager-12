@@ -32,14 +32,6 @@ const render = (container, child, place = PlaceTemplate.BEFOREEND) => {
   }
 };
 
-const renderTemplate = (container, template, place = PlaceTemplate.BEFOREEND) => {
-  if (container instanceof AbstractView) {
-    container = container.getElement();
-  }
-
-  container.insertAdjacentHTML(place, template);
-};
-
 const createElement = (template) => {
   const newElement = document.createElement(`div`);
   newElement.innerHTML = template;
@@ -78,4 +70,4 @@ const remove = (component) => {
 };
 
 
-export {render, renderTemplate, createElement, replace, remove, PlaceTemplate};
+export {render, createElement, replace, remove, PlaceTemplate};
