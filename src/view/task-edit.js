@@ -83,7 +83,7 @@ const createTaskEditTemplate = ({color, description, dueDate, repeating, isDueDa
 
   const colorsTemplate = createTaskEditColorsTemplate(color);
 
-  const isSubmitDisabled = (isDueDate && dueDate === null) || (isRepeating && !isTaskRepeating(repeating));
+  const isSubmitDisabled = (isDueDate && !dueDate) || (isRepeating && !isTaskRepeating(repeating));
 
   return `<article class="card card--edit card--${color} ${repeatingClassName} ${repeatingClassName}">
     <form class="card__form" method="get">
@@ -316,7 +316,7 @@ class TaskEdit extends SmartView {
         {},
         task,
         {
-          isDueDate: task.dueDate !== null,
+          isDueDate: !!task.dueDate,
           isRepeating: isTaskRepeating(task.repeating),
           isDisabled: false,
           isSaving: false,

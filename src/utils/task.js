@@ -7,7 +7,7 @@ const getCurrentDate = () => {
 };
 
 const isTaskExpired = (dueDate) => {
-  if (dueDate === null) {
+  if (!dueDate) {
     return false;
   }
   const currentDate = getCurrentDate();
@@ -15,7 +15,7 @@ const isTaskExpired = (dueDate) => {
 };
 
 const isTaskExpiringToday = (dueDate) => {
-  if (dueDate === null) {
+  if (!dueDate) {
     return false;
   }
   const currentDate = getCurrentDate();
@@ -35,15 +35,15 @@ const formatTaskDueDate = (dueDate) => {
 // Функция помещает задачи без даты в конце списка,
 // возвращая нужный вес для колбэка sort
 const getWeightForNullDate = (dateA, dateB) => {
-  if (dateA === null && dateB === null) {
+  if (!dateA && !dateB) {
     return 0;
   }
 
-  if (dateA === null) {
+  if (!dateA) {
     return 1;
   }
 
-  if (dateB === null) {
+  if (!dateB) {
     return -1;
   }
 
@@ -53,7 +53,7 @@ const getWeightForNullDate = (dateA, dateB) => {
 const sortTaskUp = (taskA, taskB) => {
   const weight = getWeightForNullDate(taskA.dueDate, taskB.dueDate);
 
-  if (weight !== null) {
+  if (weight) {
     return weight;
   }
 
@@ -63,7 +63,7 @@ const sortTaskUp = (taskA, taskB) => {
 const sortTaskDown = (taskA, taskB) => {
   const weight = getWeightForNullDate(taskA.dueDate, taskB.dueDate);
 
-  if (weight !== null) {
+  if (weight) {
     return weight;
   }
 

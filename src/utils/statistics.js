@@ -35,7 +35,7 @@ const countCompletedTaskInDateRange = (tasks, dateFrom, dateTo) => {
     moment(dueDate).isSame(dateTo);
 
   return tasks.reduce((counter, task) => {
-    if (task.dueDate === null) {
+    if (!task.dueDate) {
       return counter;
     }
 

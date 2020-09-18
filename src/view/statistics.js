@@ -200,7 +200,7 @@ class Statistics extends SmartView {
   removeElement() {
     super.removeElement();
 
-    if (this._colorsCart !== null || this._daysChart !== null) {
+    if (this._colorsCart || this._daysChart) {
       this._colorsCart = null;
       this._daysChart = null;
     }
@@ -249,7 +249,7 @@ class Statistics extends SmartView {
   }
 
   _setCharts() {
-    if (this._colorsCart !== null || this._daysChart !== null) {
+    if (this._colorsCart || this._daysChart) {
       this._colorsCart = null;
       this._daysChart = null;
     }

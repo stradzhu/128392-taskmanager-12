@@ -20,7 +20,7 @@ class TaskNew {
   init(callback) {
     this._destroyCallback = callback;
 
-    if (this._taskEditComponent !== null) {
+    if (this._taskEditComponent) {
       return;
     }
 
@@ -34,11 +34,11 @@ class TaskNew {
   }
 
   destroy() {
-    if (this._taskEditComponent === null) {
+    if (!this._taskEditComponent) {
       return;
     }
 
-    if (this._destroyCallback !== null) {
+    if (this._destroyCallback) {
       this._destroyCallback();
     }
 

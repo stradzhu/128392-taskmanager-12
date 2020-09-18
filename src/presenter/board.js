@@ -157,7 +157,7 @@ class Board {
   }
 
   _renderSort() {
-    if (this._sortComponent !== null) {
+    if (this._sortComponent) {
       // можно и не делать, это для наглядности
       this._sortComponent = null;
     }
@@ -201,7 +201,7 @@ class Board {
   }
 
   _renderLoadMore() {
-    if (this._loadMoreComponent !== null) {
+    if (this._loadMoreComponent) {
       this._loadMoreComponent = null;
     }
 

@@ -30,7 +30,7 @@ class Filter {
     this._component = new FilterView(filters, this._current);
     this._component.setTypeChangeHandler(this._handle.typeChange);
 
-    if (prevComponent === null) {
+    if (!prevComponent) {
       render(this._container, this._component, PlaceTemplate.BEFOREEND);
       return;
     }

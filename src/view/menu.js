@@ -39,7 +39,7 @@ class Menu extends AbstractView {
   setMenuItem(menuItem) {
     const item = this.getElement().querySelector(`[value=${menuItem}]`);
 
-    if (item !== null) {
+    if (item) {
       item.checked = true;
     }
   }

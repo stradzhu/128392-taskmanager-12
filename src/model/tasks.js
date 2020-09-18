@@ -62,7 +62,7 @@ class Tasks extends Observer {
         {},
         task,
         {
-          dueDate: task.due_date !== null ? new Date(task.due_date) : task.due_date, // На клиенте дата хранится как экземпляр Date
+          dueDate: task.due_date ? new Date(task.due_date) : task.due_date, // На клиенте дата хранится как экземпляр Date
           isArchive: task.is_archived,
           isFavorite: task.is_favorite,
           repeating: task.repeating_days
